@@ -41,3 +41,10 @@ author:
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/hsiangyunwu"
+
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-include-cache # REQUIRED to use include_cached
+  - jekyll-feed
+  - jekyll-seo-tag
