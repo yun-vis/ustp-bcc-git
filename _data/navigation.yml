@@ -1,0 +1,8 @@
+# main links
+main:
+  - title: "Setup"
+    url: /pages/setup
+  - title: "GitHub Pages"
+    url: /pages/actions_and_pages
+  # - title: "Sitemap"
+  #   url: /sitemap/
