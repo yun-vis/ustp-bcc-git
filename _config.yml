@@ -3,19 +3,19 @@ theme: null   # REQUIRED because you're using a remote theme
 remote_theme: "mmistakes/minimal-mistakes@4.24.0" # REQUIRED to specify the theme and version
 
 # Site Settings
-title: "Git CheatSheet"
-name                     : "Hsiang-Yun Wu"
-description: "This website documents Hsiang-Yun Wu's teaching activities on Git"
-url: "https://yun-vis.github.io/ustp-bcc-git"
-teaser                   : "/assets/images/teaser/teaser.png"
+title             : "Git CheatSheet"
+name              : "Git CheatSheet"
+description       : "This website documents Hsiang-Yun Wu's teaching activities on Git"
+url               : "https://yun-vis.github.io/ustp-bcc-git"
+teaser            : "/assets/images/teaser/teaser.png"
 
 # Site Author
 author:
-  name             : "Hsiang-Yun Wu"
-  avatar           : "/assets/images/photos/2023.jpg"
-  bio              : "I am a visualization researcher and lecturer."
-  location         : "Austria"
-  email            :
+  name            : "Hsiang-Yun Wu"
+  avatar          : "/assets/images/photos/2023.jpg"
+  bio             : "I am a visualization researcher and lecturer."
+  location        : "Austria"
+  email           :
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
