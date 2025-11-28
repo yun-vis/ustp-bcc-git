@@ -1,3 +1,9 @@
+---
+layout: single
+classes: wide
+title: "GitHub Pages"
+last_modified_at: 2025-11-28
+---
 
 # GitHub Actions for GitHub Pages
 
