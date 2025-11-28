@@ -93,4 +93,16 @@ Go to the repository on GitHub:
 Settings -> Pages -> Build and deployment -> Source: GitHub Actions
 Settings -> Environment -> github-pages
 
-## Step 8: Monitor the Action and check if the pages is properly launched.
+## Step 8: Monitor the Actions on GitHub
+
+Check if the pages is properly deployed uder "https://<your-user>.github.io/<your-repo>"
+Once it is deployed, go to Settings -> Pages -> Your site is live at "http://..."
+
+
+# Notes
+
+- Some themes may use Jekyll Merges Config
+  - For example, the _config.yml, you overwrite what you set and you inherit anything you don’t set.
+  - Files in directories override, not merge.
+
+# References
