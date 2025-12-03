@@ -115,3 +115,5 @@ Once it is deployed, go to Settings -> Pages -> Your site is live at "http://...
   - Files in directories override, not merge.
 
 # References
+
+- [Configuring a publishing source for your GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)

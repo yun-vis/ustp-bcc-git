@@ -2,102 +2,50 @@
 # permalink: /404.html
 layout: single
 classes: wide
-title: "GitHub"
+title: "Git"
 header:
   image: /assets/images/teaser/teaser.png
   caption: "Image credit: [**Yun**](http://yun-vis.net)"
 last_modified_at: 2025-11-26
 ---
 
-# Git
+# Installation
+
+## Windows
+
+Download and run the distribution from [https://git-scm.com/](https://git-scm.com/)
+[Git SCM to Windows](https://gitforwindows.org/)
+
+# Git Usage
 
 - [Git Cheat Sheet (git-scm)](https://git-scm.com/cheat-sheet)
 - [GIT CHEAT SHEET (GitHub)](https://education.github.com/git-cheat-sheet-education.pdf)
 
-# GitHub Action
+## Some helpful commands
 
-- [Quickstart for GitHub Actions](https://docs.github.com/en/actions/get-started/quickstart)
-- [Learn X in Y minutes](https://learnxinyminutes.com/yaml/)
-- [yaml.org](https://yaml.org/)
-- [What is YAML?](https://www.yaml.info/learn/index.html)
-- []
-  
-GH echo Action
-```yaml
-name: Echo Current Date
-
-on:
-  push:        # Runs on every push
-    branches:
-      - '**'   # All branches
-
-jobs:
-  echo-date:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Print current date
-        run: |
-          echo "Current date and time:"
-          date 
-```
-
-First GitHub Action
-```yaml
-name: Spell Check Markdown Files
-
-on:
-  pull_request:
-    branches:
-      - '**'
-    paths:
-      - '**/*.md'
-
-jobs:
-  spellcheck:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Run Markdown Spellcheck
-        uses: rojopolis/spellcheck-github-actions@v0
-        with:
-          config_path: spellcheck.yml
-          task_name: Markdown
-          output_file: spellcheck-output.txt
-
-      - name: Upload Spellcheck Report
-        if: '!cancelled()' # Do not upload artifact if job was cancelled
-        uses: actions/upload-artifact@v4
-        with:
-          name: spellcheck-report
-          path: spellcheck-output.txt
-```
-
-```yaml
+- $ diff filea.py fileb.py
+- $ diff -u filea.py fileb.py
+- $ diff filea.py fileb.py  // create *.diff 
+- $ patch filea.py < fileb.diff 
+- [diff](http://man7.org/linux/man-pages/man1/diff.1.html)
+- [patch](http://man7.org/linux/man-pages/man1/patch.1.html)
 
 
-matrix:
-  - name: Markdown
-    aspell:
-      lang: en
-      ignore-case: true
-    encoding: utf-8
-    pipeline:
-      - pyspelling.filters.markdown:
-          markdown_extensions:
-            - pymdownx.superfences
-      - pyspelling.filters.html:
-          comments: false
-          ignores:
-            - code
-            - pre
-    sources:
-      - '**/*.md'         # All Markdown files
-    default_encoding: utf-8
-```
+# WSL (runing Windows Subsystem for Linux)
+
+- [Installation](https://learn.microsoft.com/en-us/windows/wsl/)
+- Issue: for AMD CPU, one needs to enable virtualization in BIOS
+  - Enter BIOS setting -> Advanced CPU Settings -> enable SVM Mode
+- Install "Remote Development" extension from VS Code
+- Click on the extension icon at left-bottom and connect to WSL
+- Open the folder -> click on "Show Local"
+
+# Exercises
+
+- [LeetCode](https://leetcode.com/)
+- [HackerRank](https://www.hackerrank.com/)
+
+# References
+
+- [Pro Git](https://git-scm.com/book/en/v2)
+- [Git tutorial](https://git-scm.com/docs/gittutorial)

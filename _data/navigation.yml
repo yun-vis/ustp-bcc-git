@@ -2,7 +2,11 @@
 main:
   - title: "Setup"
     url: /pages/setup
+  - title: "GitHub"
+    url: /pages/github
   - title: "GitHub Pages"
     url: /pages/actions_and_pages
-  # - title: "Sitemap"
+  - title: "CCL4 Setup"
+    url: /pages/ccl4
+  # - title: "Sitema p"
   #   url: /sitemap/
