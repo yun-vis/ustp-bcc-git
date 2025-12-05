@@ -6,7 +6,7 @@ title: "GitHub Actions"
 header:
   image: /assets/images/teaser/teaser.png
   caption: "Image credit: [**Yun**](http://yun-vis.net)"
-last_modified_at: 2025-11-26
+last_modified_at: 2025-12-05
 ---
 
 GitHub Actions makes it easy to automate all your software workflows, now with world-class CI/CD. Build, test, and deploy your code right from GitHub. Make code reviews, branch management, and issue triaging work the way you want.
@@ -182,6 +182,10 @@ matrix:
     - click on "Add checks" -> search for "spellcheck" and add it 
     - Click on "Any source" and choose "GitHub Actions"
 
+- Create the second ruleset called "no push without push request (pr)"
+  - Add "Target branches" -> add target -> include Default branch
+  - enable "Require a pull request before merging"
+
 ## Step 6: Test the SpellCheck workflow
 
 - Add a typo (or even without a typo) in the README.md and push the change to the master branch
@@ -195,17 +199,16 @@ Note 2: We can use git reset to remove the old commits and fix the problem befor
 git reset --soft HEAD~2
 ```
 
-## Step 6: Test the SpellCheck workflow
-
-- Create the second ruleset called "no push without push request (pr)"
-  - Add "Target branches" -> add target -> include Default branch
-  - enable "Require a pull request before merging"
-
+Note 3: When this rule is enabled on a protected branch (e.g., master): GitHub cannot validate status checks for a direct push, because status checks only run on a ref created by a pull request or a push to a non-protected branch. So GitHub enforces the only safe option: It forces all changes to go through a pull request, because that’s the only workflow where GitHub can run and verify status checks before the code lands on master.
 
 - Checkout a new branch called featureBranch
-- Add a typo in the README.md and push the change in the new branch
-- The push should be block
+- Add a typo in the README.md and push the change in this new branch. Push to the new branch should be successful since the check will be done when a pull_request happens. Check the file .github/workflows/spellcheck.yml 
 
+- Once the push done, do a pull requst to the master branch. Now the workflow should be starting and does not pass the spellcheck due to the typo.
+  
+- Fix the typo and push the changes to the featureBranch
+
+- Under the Pull requests, one should see that the new codes pass the spellcheck and is ready for merging back to master.
 
 
 # References
