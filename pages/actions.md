@@ -173,13 +173,36 @@ matrix:
 
 - Push the changes to the master repository
 
-## Step 5: Setup rules on GitHub
+## Step 5: Setup a spellcheck rule on GitHub
 
-- Go to Settings -> 
+- Go to Settings -> Rulesets -> New ruleset -> New branch ruleset
+- Create the ruleset called "need passing ci"
+  - Add "Target branches" -> add target -> include Default branch
+  - enable "Require status checks to pass"
+    - click on "Add checks" -> search for "spellcheck" and add it 
+    - Click on "Any source" and choose "GitHub Actions"
 
 ## Step 6: Test the SpellCheck workflow
 
-- Checkout a new branch 
+- Add a typo (or even without a typo) in the README.md and push the change to the master branch
+- The push should be blocked.
+
+Note 1: This is because branch protection rules are blocking direct commits. GitHub’s Branch protection rules often prevent users from pushing directly to main. One must open a pull request instead.
+
+Note 2: We can use git reset to remove the old commits and fix the problem before pushing it again. Check git usage.
+
+```bash
+git reset --soft HEAD~2
+```
+
+## Step 6: Test the SpellCheck workflow
+
+- Create the second ruleset called "no push without push request (pr)"
+  - Add "Target branches" -> add target -> include Default branch
+  - enable "Require a pull request before merging"
+
+
+- Checkout a new branch called featureBranch
 - Add a typo in the README.md and push the change in the new branch
 - The push should be block
 
@@ -196,3 +219,4 @@ matrix:
 - [The Official YAML Web Site](https://yaml.org/)
 - [What is YAML? A beginner's guide](https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/)
 - [About pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
+- [About rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets)
