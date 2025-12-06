@@ -4,6 +4,10 @@ main:
     url: /pages/setup
   - title: "GitHub"
     url: /pages/github
+  - title: "GitHub Actions"
+    url: /pages/actions
+  - title: "GitHub Actions Exercise"
+    url: /pages/actions_exercise
   - title: "GitHub Pages"
     url: /pages/actions_and_pages
   - title: "CCL4 Setup"

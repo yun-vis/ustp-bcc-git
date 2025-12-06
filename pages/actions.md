@@ -182,7 +182,7 @@ matrix:
     - click on "Add checks" -> search for "spellcheck" and add it 
     - Click on "Any source" and choose "GitHub Actions"
 
-- Create the second ruleset called "no push without push request (pr)"
+- Create the second ruleset called "no push without pull request (pr)"
   - Add "Target branches" -> add target -> include Default branch
   - enable "Require a pull request before merging"
 
@@ -209,6 +209,11 @@ Note 3: When this rule is enabled on a protected branch (e.g., master): GitHub c
 - Fix the typo and push the changes to the featureBranch
 
 - Under the Pull requests, one should see that the new codes pass the spellcheck and is ready for merging back to master.
+
+
+# Questions
+
+- Why do we need ceate two seperate rulesets?
 
 
 # References

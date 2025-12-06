@@ -6,7 +6,7 @@ title: "GitHub"
 header:
   image: /assets/images/teaser/teaser.png
   caption: "Image credit: [**Yun**](http://yun-vis.net)"
-last_modified_at: 2025-12-03
+last_modified_at: 2025-12-05
 ---
 
 # Basics
@@ -45,3 +45,5 @@ Note: In Git branch names, the slash / doesn’t have special functional meaning
 - After pushing a new branch, GitHub shows: Compare & pull request on the Code tag. Press it.
 - If no issues appear, one can click on merging the featureBranch to the master branch
 
+
+# Artifact
