@@ -219,16 +219,12 @@ in .github/workflows/build.yml, add
 Settings -> Pages -> Build and deployment -> Source: GitHub Actions
 Settings -> Environment -> github-pages
 
-in .github/workflows/build.yml, add
+in .github/workflows/deploy.yml, add
 ```yaml
 # Sample workflow for building and deploying a Jekyll site to GitHub Pages
 name: Deploy GitHub Pages
 
 on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["master"]
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -245,7 +241,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  build: # Build job
 
     runs-on: ubuntu-latest
 
@@ -273,7 +269,7 @@ jobs:
         path: test-results/results.xml
 
     - name: Build project
-      run: npm run build --if-present
+      run: npm run build 
 
     - name: Setup Pages
       uses: actions/configure-pages@v5
@@ -282,7 +278,7 @@ jobs:
       uses: actions/upload-pages-artifact@v3
       with:
         path: './dist' # Vite builds to the 'dist' folder
-
+        
   # Deployment job
   deploy:      
     environment:
@@ -290,13 +286,14 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     runs-on: ubuntu-latest
-    
+
     needs: build
-    
+
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
 ```
 
 
