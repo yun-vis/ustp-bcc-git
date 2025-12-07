@@ -11,7 +11,7 @@ last_modified_at: 2025-12-05
 
 # Basics
 
-- Pull request: A pull request is a proposal to merge a set of changes from one branch into another. In a pull request, collaborators can review and discuss the proposed set of changes before they integrate the changes into the main codebase.
+## Pull request: A pull request is a proposal to merge a set of changes from one branch into another. In a pull request, collaborators can review and discuss the proposed set of changes before they integrate the changes into the main codebase.
 
 Note: A pull request is a feature added by hosting platforms, such as:
 
@@ -29,6 +29,22 @@ A pull request is a web-based workflow that allows you to:
 - merge changes into a branch (usually main)
 - Git does not implement this — GitHub does.
  
+
+## Artifact
+
+An artifact is a file or collection of files produced during a workflow run. Artifacts allow you to persist data after a job has completed, and share that data with another job in the same workflow
+
+- [Workflow artifacts](https://docs.github.com/en/actions/concepts/workflows-and-actions/workflow-artifacts)
+- [Store and share data with workflow artifacts](https://docs.github.com/en/actions/tutorials/store-and-share-data)
+
+## Releases
+
+- [About releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)
+
+- [Git Basics - Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
+
+## Tags
+
 # Create a Pull Request
 
 - Push your local commits to your new branch:
@@ -46,4 +62,3 @@ Note: In Git branch names, the slash / doesn’t have special functional meaning
 - If no issues appear, one can click on merging the featureBranch to the master branch
 
 
-# Artifact

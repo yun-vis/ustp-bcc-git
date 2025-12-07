@@ -2,6 +2,8 @@
 main:
   - title: "Setup"
     url: /pages/setup
+  - title: "Git"
+    url: /pages/git
   - title: "GitHub"
     url: /pages/github
   - title: "GitHub Actions"

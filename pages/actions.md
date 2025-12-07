@@ -215,9 +215,9 @@ Note 3: When this rule is enabled on a protected branch (e.g., master): GitHub c
 
 - Why do we need ceate two seperate rulesets?
 
-
 # References
 
+- [GitHub Actions](https://github.com/features/actions)_
 - [Understanding GitHub Actions](https://docs.github.com/en/actions/get-started/understand-github-actions)
 - [Quickstart for GitHub Actions](https://docs.github.com/en/actions/get-started/quickstart)
 - [GitHub Actions documentation](https://docs.github.com/en/actions)
@@ -226,5 +226,6 @@ Note 3: When this rule is enabled on a protected branch (e.g., master): GitHub c
 - [DevOps Foundations: Continuous Delivery/Continuous Integration](https://www.linkedin.com/learning/devops-foundations-continuous-delivery-continuous-integration-14449917/)
 - [The Official YAML Web Site](https://yaml.org/)
 - [What is YAML? A beginner's guide](https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/)
+- [YAML Tutorial: A Complete Guide to Language, Format, and Syntax](https://www.cloudbees.com/blog/yaml-tutorial-everything-you-need-get-started)
 - [About pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
 - [About rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets)

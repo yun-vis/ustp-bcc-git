@@ -305,10 +305,147 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   base: "./",
 });
+```
 
 ## Step 5: Create a release branch
 
+- Tasks:
+  - Create a release branch with the following name: "release/1.0.0" from the latest code in main.
+
+in .github/workflows/release.yml
+```yaml
+name: Create Specific Release Branch
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch_name:
+        description: 'The full name of the release branch to create (e.g., release/1.0.0)'
+        required: true
+        default: 'release/1.0.0'
+
+permissions: 
+  contents: write # This grants the necessary permission to create/push branches
+
+jobs:
+  create_release_branch:
+
+    name: Create Release
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: 'master'
+          # This line ensures the runner has write access to create a branch
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Git
+        run: |
+          # Configure Git to use the GitHub Actions bot identity
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+      - name: Create and Push New Release Branch
+        id: create_branch
+        run: |
+          BRANCH_NAME="${{ github.event.inputs.branch_name }}"
+          echo "Attempting to create branch: $BRANCH_NAME"          
+
+          # Create the new branch from the current HEAD (which is the latest 'main')
+          git branch $BRANCH_NAME
+          
+          # Push the new branch to GitHub
+          git push origin $BRANCH_NAME
+          
+          echo "Branch '$BRANCH_NAME' successfully created from main."         
+```
+
 ## Step 6: Add a release note for the release/1.0.0 branch
+
+- Tasks:
+  - Add a release note in the repository
+  - Automatically create a tag
+  - Generate release notes
+  - Generate a discussion so that others can comment on the new release
+
+in .github/workflows/auto_release.yml
+```yaml
+name: Automatic GitHub Release
+
+on:
+  push:
+    # Trigger the workflow only when a commit is pushed to a release branch
+    branches:
+      - 'release/**' 
+
+jobs:
+  create_github_release:
+
+    name: Auto Create Release
+
+    runs-on: ubuntu-latest
+    
+    # Grant necessary permissions for the GITHUB_TOKEN to create the release/tag
+    permissions:
+      contents: write # Required to create the release, tag, and publish notes
+      discussions: write # Required to optionally create a discussion
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Extract Version Tag
+        id: get_version
+        run: |
+          # The branch name will be 'release/1.0.0'. We extract the '1.0.0' part.
+          BRANCH_NAME="${{ github.ref_name }}"
+          # Removes 'release/' prefix
+          TAG_NAME=${BRANCH_NAME#release/}
+          
+          # Set the output variable 'tag' for use in the next step
+          echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
+
+      - name: Create Release & Tag
+        uses: softprops/action-gh-release@v2 # A popular, feature-rich action for releases
+        with:
+          # 1. Automatically create a tag
+          tag_name: v${{ steps.get_version.outputs.tag }} # Use the extracted version, prepended with 'v'
+          name: Release v${{ steps.get_version.outputs.tag }}
+          
+          # 2. Generate release notes
+          # Compares the current commit to the previous tag/release to generate a changelog
+          generate_release_notes: true 
+          
+          # 3. Add a release note in the repository (This is the Release description itself)
+          body: |
+            ## Release Notes for v${{ steps.get_version.outputs.tag }}
+            
+            This is an automated release created from the ${{ github.ref_name }} branch.
+            
+            **Highlights:**
+            * [Generated Notes Here]
+            
+            ---
+            
+            **Full Changelog:**
+            ${{ steps.release.outputs.body }} # Placeholder for generated notes
+          
+          # 4. Generate a discussion
+          # Creates a new discussion for the release in the 'Announcements' category
+          discussion_category_name: Announcements 
+          
+          # Optional: Make it a draft first if you want to review it
+          # draft: true 
+          
+          # Optional: Set this if this is a pre-release version
+          # prerelease: false
+```
+
+- Since we create a new workflow, we can merge this change to builds/buildFeature to trigger the auto_release workflow
+
 
 # Questions
 
@@ -318,3 +455,7 @@ export default defineConfig({
 - How does .github dependabot work here?
 - How to update package.json if I don't run the project locally? At least I didn't manage.
 - How to see the uploaded test results?
+
+# References
+
+- [Dependabot options reference](https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference)
