@@ -33,11 +33,17 @@ $ git pull origin master
 $ git checkout -b myNewBranchName
 # Switch to an existing branch
 $ git checkout myBranchName
-
 ```
 
 ## Remove a local branch
 
 ```bash
 $ git branch -D myLocalBranchName
+```
+
+## Add a tag
+
+```bash
+$ git tag -a v2.0.0 -m "release v2.0.0"
+$ git push origin v2.0.0
 ```

@@ -446,11 +446,118 @@ jobs:
 
 - Since we create a new workflow, we can merge this change to builds/buildFeature to trigger the auto_release workflow
 
+## Step 7: Enable and configure dependabot
+
+- Tasks:
+  - Enable dependabot
+  - Configure it to run weekly
+  - Exclude a dependency from getting updated (i.e. globals)
+  - Merge the dependabot update PRs when CI is green
+  - https://docs.github.com/en/code-security/getting-started/dependabot-quickstart-guide
+
+## Step 8: Add an action to create a release
+
+- Tasks:
+  - Use this action: https://github.com/softprops/action-gh-release
+  - Add a release GH action that creates a release on your repository
+  - The action should run when a new tag is pushed to the repository (i.e. v2.0.0)
+  - Upload the built memory-card-game (the "binaries") as a .zip file as part of the release
+
+in .github/workflows/auto_release_new.yml
+```yaml
+name: Automatic GitHub Release New
+
+on:
+  push:
+    # Trigger the workflow when a new tag is pushed to the repository
+    tags:
+      - 'v*' 
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    # Grant necessary permissions for the GITHUB_TOKEN to create the release/tag
+    permissions:
+      contents: write # Required to create the release, tag, and publish notes
+      discussions: write # Required to optionally create a discussion
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Create zip archive
+        run: |
+          cd dist
+          zip -r ../release.zip .
+        shell: bash
+
+      - name: Extract Version Tag
+        id: get_version
+        run: |
+          # The tag will be 'v1.0.0'. We extract the version part without the 'v' prefix.
+          TAG_NAME="${{ github.ref_name }}"
+          # Removes 'v' prefix if present
+          VERSION=${TAG_NAME#v}
+          
+          # Set the output variable 'tag' for use in the next step
+          echo "tag=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create Release & Tag
+        uses: softprops/action-gh-release@v2 # A popular, feature-rich action for releases
+        with:
+          # 1. Automatically create a tag
+          tag_name: v${{ steps.get_version.outputs.tag }} # Use the extracted version, prepended with 'v'
+          name: Release v${{ steps.get_version.outputs.tag }}
+          
+          # 2. Generate release notes
+          # Compares the current commit to the previous tag/release to generate a changelog
+          generate_release_notes: true 
+          
+          # 3. Add a release note in the repository (This is the Release description itself)
+          body: |
+            ## Release Notes for v${{ steps.get_version.outputs.tag }}
+            
+            This is an automated release created from a new tag push.
+            
+            **Highlights:**
+            * Built and packaged binary included in assets
+            
+            ---
+            
+            **Full Changelog:**
+            See the commits included in this release.
+          
+          # 4. Upload the built binary as an asset
+          files: release.zip
+          
+          # 5. Generate a discussion
+          # Creates a new discussion for the release in the 'Announcements' category
+          discussion_category_name: Announcements 
+          
+          # Optional: Make it a draft first if you want to review it
+          # draft: true 
+          
+          # Optional: Set this if this is a pre-release version
+          # prerelease: false
+```
 
 # Questions
 
 - Can we have a sample solution?
-- Why do we need ceate two seperate rulesets? What is the difference?
+- Why do we need ceate two seperate rulesets? What is the difference? 
 - Why I can not use npm ci?
 - How does .github dependabot work here?
 - How to update package.json if I don't run the project locally? At least I didn't manage.
