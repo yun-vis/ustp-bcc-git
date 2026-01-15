@@ -215,6 +215,10 @@ Note 3: When this rule is enabled on a protected branch (e.g., master): GitHub c
 
 - Why do we need ceate two seperate rulesets?
 
+# Terminology
+
+- [bypass]: A GitHub bypass list of rulesets defines specific users, teams, or GitHub Apps that are exempt from certain rules (like secret scanning or branch protections) within a ruleset, allowing them to bypass enforcement for legitimate actions, such as automation or essential administrative tasks, without permanently disabling the rules for everyone else. It acts as a controlled exception mechanism for high-trust actors, ensuring rules aren't a hindrance in specific scenarios, with actions often logged for auditing. 
+
 # References
 
 - [GitHub Actions](https://github.com/features/actions)_
