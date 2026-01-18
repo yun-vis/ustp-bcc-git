@@ -14,5 +14,7 @@ main:
     url: /pages/actions_and_pages
   - title: "CCL4 Setup"
     url: /pages/ccl4
+  - title: "General"
+    url: /pages/general
   # - title: "Sitema p"
   #   url: /sitemap/
