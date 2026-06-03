@@ -6,7 +6,7 @@ title: "CCL4 (GitLab)"
 header:
   image: /assets/images/teaser/teaser.png
   caption: "Image credit: [**Yun**](http://yun-vis.net)"
-last_modified_at: 2026-05-21
+last_modified_at: 2026-06-03
 ---
 
 # Git Collaboration Concept
@@ -40,23 +40,23 @@ In the shared repository model, collaborators are granted push access to a singl
 1. Visit the [USTP GitLab](https://git.nwt.fhstp.ac.at/) and login with your cridential
 2. Home -> Project -> New Project > Create from template -> Pages/Plan HTML -> Do basic settings 
 3. Enter the project main page -> Edit .gitlab-ci.yml using Edit in pipeline editor -> Up the content to
-    ```bash 
-    stages:
-    - deploy
+  ```bash 
+  stages:
+  - deploy
 
-    pages:
-      stage: deploy
-      image: alpine:latest
-      tags: ["docker"]
-      script:
-        - echo "Deploying GitLab Pages from ./public"
-        - ls -la public
-      artifacts:
-        paths:
-          - public
-      rules:
-        - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-    ```
+  pages:
+    stage: deploy
+    image: alpine:latest
+    tags: ["docker"]
+    script:
+      - echo "Deploying GitLab Pages from ./public"
+      - ls -la public
+    artifacts:
+      paths:
+        - public
+    rules:
+      - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  ```
 4. From the main project page -> Deploy -> Pages
 5. Add a SSH key before cloning a project
     ```bash 
