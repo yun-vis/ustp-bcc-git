@@ -40,6 +40,7 @@ In the shared repository model, collaborators are granted push access to a singl
 1. Visit the [USTP GitLab](https://git.nwt.fhstp.ac.at/) and login with your cridential
 2. Home -> Project -> New Project > Create from template -> Pages/Plan HTML -> Do basic settings 
 3. Enter the project main page -> Edit .gitlab-ci.yml using Edit in pipeline editor -> Up the content to
+
   ```bash 
   stages:
   - deploy
@@ -57,8 +58,8 @@ In the shared repository model, collaborators are granted push access to a singl
     rules:
       - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
   ```
-4. From the main project page -> Deploy -> Pages
-5. Add a SSH key before cloning a project
+1. From the main project page -> Deploy -> Pages
+2. Add a SSH key before cloning a project
     ```bash 
     $ git clone git@git.nwt.fhstp.ac.at:lbwu/mypage.git
     ```
